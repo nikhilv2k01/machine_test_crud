@@ -1,0 +1,80 @@
+th{
+    color: white;
+    padding: 30px;
+    background-color: #525852;
+    border-collapse: collapse;
+    border: 1px solid white;
+}
+table {
+    color: black;
+    border: 1px solid white;
+  
+}
+
+table,
+
+td {
+    text-align: center;
+    height:50px ;
+    border: 1px solid white;
+    border-collapse: collapse;
+}
+
+
+td {
+    background-color:#b4ddb4;
+}
+
+.parent {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    flex-grow: 1;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+/* --------- Non-flexbox related styles --------- */
+.child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    font-size: 20px;
+    line-height: 20px;
+    color: #ffe8c3;
+    background-color: whitesmoke;
+    border-radius: 2px;
+
+}
+
+body {
+    background-color: #ffffff;
+    font-family: Verdana;
+    font-weight: 600;
+    margin: 0;
+}
+
+#hf {
+    background-color: #525852;
+}
+
+#sidebar {
+    background-color: #9fa79c;
+}
+
+a:hover {
+   
+    color: whitesmoke;
+}
+a{
+    text-decoration: none;
+}

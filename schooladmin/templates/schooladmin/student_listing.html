@@ -1,0 +1,68 @@
+{% extends 'schooladmin/master.html' %} {% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="child content">
+  <div class="container">
+    <div class="row text-center" style="background-color: grey">
+      <h5>View Active/Inactive Students</h5>
+      <div class="col-md-12">
+        <form action="" method="POST">
+          {% csrf_token %}
+
+          <table class="table table-hover table-primary">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Active/Inactive</th>
+              </tr>
+            </thead>
+
+            {% for student in student_list %}
+            <tbody>
+              <tr>
+                <th style="color: black" scope="row">{{student.id}}</th>
+                <td>{{student.fname}}</td>
+                <td>{{student.username}}</td>
+                <td style="width: 30%">
+
+                  {% if student.status %}
+                  <button class="btn btn-primary" name="active" onclick="addPermission( '{{student.id}}' )"   type="button">Active</button>
+
+                  {% else %}
+                  <button class="btn btn-danger" name="inactive" onclick="addPermission( '{{student.id}}' )"
+                    type="button">Inactive</button>
+                  {% endif %}
+                </td>
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function addPermission(userId) {
+    console.log(userId)
+    $.ajax({
+        url: '/schooladmin/set_permission',
+        type: 'POST',
+        data: {
+          'userId': userId                     
+        },
+        success:function(response){
+          alert(response.message)
+          // window.location.href='/stdlist'
+
+        }   
+    })
+  }
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends "student/master.html" %}
+
+{% block content %}
+
+ <!-- Content body start -->
+ <div id="main-wrapper">
+    <div class="content-body">
+      <div class="container-fluid">
+        <form action="" method="POST" onsubmit="return validate();" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <!-- Name input -->
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="fname" value="{{ update_student.fname }}" placeholder="Full Name*" />
+            <small id="name_err"></small>
+          </div>
+
+          <!-- Phone Number input -->
+          <div class="form-group">
+            <label for="number">Phone Number</label>
+            <input type="text" class="form-control" id="contact" name="contact" value="{{update_student.phone}}" placeholder="Phone Number*" />
+            <small id="cont_err"></small>
+          </div>
+
+          <!-- Email id input -->
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" aria-describedby="emailHelp" id="usname" name="username" value="{{update_student.username}}"
+              placeholder="Username*" />
+            <small id="us_err"></small>
+          </div>
+
+          <!-- password input -->
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="text" class="form-control" id="pswd" name="password" value="{{update_student.password}}" placeholder="Password*" />
+            <small id="pswd_err"></small>
+          </div>
+
+          <!-- confirm password input -->
+          <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="text" class="form-control" id="cpswd" name="confirm" value="" placeholder="Confirm Password*" />
+            <small id="cpswd_err"></small>
+          </div>
+          
+          <!-- Register button -->
+          <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Content body end -->
+
+  <script>
+    function validate(){
+        var status=1
+        var txt_name=document.getElementById("name")
+        var txt_usname=document.getElementById("usname")
+        var txt_contact=document.getElementById("contact")
+        var txt_pswd=document.getElementById("pswd")
+        var txt_cpswd=document.getElementById("cpswd")
+        mobile_pattern=/^[6-9]\d{9}$/            
+
+
+        if(txt_name.value=="")
+        {
+            document.getElementById("name_err").innerHTML="Please Enter Name"
+            document.getElementById("name_err").style.color="red"
+            txt_name.style.borderColor = "red"
+            status=0
+
+        }
+        else{
+            document.getElementById("name_err").innerHTML=""
+            txt_name.style.borderColor = ""
+            status=1
+
+
+        }
+        if(txt_contact.value=="")
+        {
+            document.getElementById("cont_err").innerHTML="Please Enter contact number"
+            document.getElementById("cont_err").style.color="red"
+            txt_contact.style.borderColor = "red"
+            status=0
+
+        }else if (txt_contact.value.match(mobile_pattern)){
+            txt_contact.style.borderColor = ""
+            document.getElementById("cont_err").innerHTML=""
+            status=1
+        }
+        else{
+            document.getElementById("cont_err").innerHTML="Please Enter a valid contact number"
+            document.getElementById("cont_err").style.color="red"
+            txt_contact.style.borderColor = "red"
+            status=0
+
+        }
+        if(txt_usname.value=="")
+        {
+            document.getElementById("us_err").innerHTML="Please Enter Username"
+            document.getElementById("us_err").style.color="red"
+            txt_usname.style.borderColor = "red"
+            status=0
+
+        }
+        else{
+            document.getElementById("us_err").innerHTML=""
+            txt_usname.style.borderColor = ""
+            status=1
+
+
+        }
+        if(txt_pswd.value=="")
+        {
+            document.getElementById("pswd_err").innerHTML="Please Enter Usename"
+            document.getElementById("pswd_err").style.color="red"
+            txt_pswd.style.borderColor = "red"
+            status=0
+
+        }
+        else{
+            document.getElementById("pswd_err").innerHTML=""
+            txt_pswd.style.borderColor = ""
+            status=1
+
+
+        }
+        if(txt_cpswd.value=="")
+        {
+            document.getElementById("cpswd_err").innerHTML="Please Enter Confirm Password"
+            document.getElementById("cpswd_err").style.color="red"
+            txt_cpswd.style.borderColor = "red"
+            status=0
+
+        }
+        else if(txt_pswd.value!=txt_cpswd.value){
+            document.getElementById("cpswd_err").innerHTML="Password does'nt match "
+            document.getElementById("cpswd_err").style.color="red"
+            txt_cpswd.style.borderColor = "red"
+            status=0
+
+        }
+        else{
+            document.getElementById("pswd_err").innerHTML=""
+            txt_cpswd.style.borderColor = ""
+            status=1 
+
+        }
+        if(status==0){
+            return false;
+        }
+        
+        
+
+        
+    }
+
+</script>
+
+{% endblock %}
